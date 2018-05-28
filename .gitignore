@@ -1,0 +1,10 @@
+/.idea
+/node_modules/*
+.DS_Store
+/.vscode/*
+/logs
+app/_dev.php
+*.rej
+.project
+/node_modules/*
+/runtime/*
