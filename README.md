@@ -7,13 +7,6 @@ docker nginx php swoole rabbitmq consul demo
 https://hub.docker.com/_/rabbitmq/
 
 # 步骤
-## 创建网络
-```angular2html
-docker network create -d macvlan  \
---subnet=10.2.1.0/19 \
---gateway=10.2.1.254 \
--o parent=eth0 macvlan
-```
 
 ## 启动
 ```shell
