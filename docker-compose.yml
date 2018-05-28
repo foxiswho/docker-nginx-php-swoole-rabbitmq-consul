@@ -11,6 +11,7 @@ services:
                 ipv4_address: 10.2.1.101
                 aliases:
                   - consulServer1
+                  
   consulServer2:
     image: consul
     command: consul agent -server -bind=10.2.1.102 -node=server002 -join 10.2.1.101 -data-dir /tmp/consul
@@ -23,6 +24,7 @@ services:
                   - consulServer2
     depends_on:
           - consulServer1
+
   consulServer3:
     image: consul
     command: consul agent -server -bind=10.2.1.103 -node=server003 -join 10.2.1.101 -data-dir /tmp/consul
@@ -35,6 +37,7 @@ services:
                   - consulServer3
     depends_on:
           - consulServer1
+
   consulManger:
       image: consul
       command: consul agent -bind=10.2.1.200 -node=mangaer -join 10.2.1.101
@@ -49,6 +52,7 @@ services:
                     - consulManger
       depends_on:
             - consulServer1
+
   rabbitmqManger:
       image: "rabbitmq:3-management"
       ports:
@@ -63,57 +67,57 @@ services:
                     - rabbitmq
       depends_on:
             - consulServer1
-  nginx:
-      build: ./nginx
-      ports:
-        - "80:80"
-      volumes:
-#        - ./nginx/vhost:/etc/nginx/conf/vhost:ro
-        - /Users/:/Users/
-        - /Volumes/:/Volumes/
-        - ./nginx/vhost:/Volumes/work/vhost:ro
-      environment:
-          - DEBUG=true
-          - HOST_OS=mac
+#  nginx:
+#      build: ./nginx
+#      ports:
+#        - "80:80"
+#      volumes:
+##        - ./nginx/vhost:/etc/nginx/conf/vhost:ro
+#        - /Users/:/Users/
+#        - /Volumes/:/Volumes/
+#        - ./nginx/vhost:/Volumes/work/vhost:ro
+#      environment:
+#          - DEBUG=true
+#          - HOST_OS=mac
+##      expose:
+##        - "9000"
+##        - "6379"
+##        - "3306"
+##        - "9200"
+##        - "9300"
+#      networks:
+#              npsrc:
+#                  aliases:
+#                    - nginx
+#      depends_on:
+#            - php
+#  php:
+#      build: ./php
 #      expose:
 #        - "9000"
-#        - "6379"
-#        - "3306"
-#        - "9200"
-#        - "9300"
-      networks:
-              npsrc:
-                  aliases:
-                    - nginx
-      depends_on:
-            - php
-  php:
-      build: ./php
-      expose:
-        - "9000"
-      volumes:
-        - /Users/:/Users/
-        - /Volumes/:/Volumes/
-      networks:
-              npsrc:
-                  aliases:
-                    - php
+#      volumes:
+#        - /Users/:/Users/
+#        - /Volumes/:/Volumes/
+#      networks:
+#              npsrc:
+#                  aliases:
+#                    - php
 #      depends_on:
 #            - mysql
-  phpcli:
-      build: ./php-cli
-      expose:
-        - "9501"
-      ports:
-        - "9501:9501"
-      volumes:
-        - /Users/:/Users/
-        - /Volumes/:/Volumes/
-        - ./php-cli/demo:/demo:ro
-      networks:
-              npsrc:
-                  aliases:
-                    - phpcli
+#  phpcli:
+#      build: ./php-cli
+#      expose:
+#        - "9501"
+#      ports:
+#        - "9501:9501"
+#      volumes:
+#        - /Users/:/Users/
+#        - /Volumes/:/Volumes/
+#        - ./php-cli/demo:/demo:ro
+#      networks:
+#              npsrc:
+#                  aliases:
+#                    - phpcli
 #  mysql:
 #      build: ./mysql
 #      hostname: mysqlhost
@@ -139,8 +143,8 @@ networks:
   npsrc:
       name: npsrc
       driver: macvlan
-#      driver_opts:
-#              parent: enp3s0
+      driver_opts:
+              parent: eth0
       ipam:
           driver: default
           config:

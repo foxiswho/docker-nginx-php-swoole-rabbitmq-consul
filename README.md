@@ -9,7 +9,10 @@ https://hub.docker.com/_/rabbitmq/
 # 步骤
 ## 创建网络
 ```angular2html
-docker network create -d macvlan  --subnet=172.172.0.0/19 --gateway=172.172.0.1 -o parent=eth0 macvlan
+docker network create -d macvlan  \
+--subnet=10.2.1.0/19 \
+--gateway=10.2.1.254 \
+-o parent=eth0 macvlan
 ```
 
 ## 启动
