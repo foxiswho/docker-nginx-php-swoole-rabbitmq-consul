@@ -7,6 +7,9 @@ services:
     environment:
             - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}'
     networks:
+            npsrc-d:
+                aliases:
+                    - consulServer1
             npsrc:
                 ipv4_address: 10.2.1.101
                 aliases:
@@ -18,6 +21,9 @@ services:
     environment:
      - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}'
     networks:
+            npsrc-d:
+                  aliases:
+                     - consulServer2
             npsrc:
                 ipv4_address: 10.2.1.102
                 aliases:
@@ -31,6 +37,9 @@ services:
     environment:
          - 'CONSUL_LOCAL_CONFIG={"skip_leave_on_interrupt": true}'
     networks:
+            npsrc-d:
+                  aliases:
+                      - consulServer3
             npsrc:
                 ipv4_address: 10.2.1.103
                 aliases:
@@ -50,6 +59,9 @@ services:
                   ipv4_address: 10.2.1.100
                   aliases:
                     - consulManger
+              npsrc-d:
+                aliases:
+                      - consulManger
       depends_on:
             - consulServer1
 
@@ -61,6 +73,9 @@ services:
            - RABBITMQ_DEFAULT_USER = guest
            - RABBITMQ_DEFAULT_PASS = guest
       networks:
+              npsrc-d:
+                    aliases:
+                      - rabbitmq
               npsrc:
                   ipv4_address: 10.2.1.99
                   aliases:
@@ -140,11 +155,13 @@ services:
 #                      aliases:
 #                        - redis
 networks:
+  npsrc-d:
+      driver: bridge
   npsrc:
-      name: npsrc
+      name: macvlannpsrc
       driver: macvlan
-      driver_opts:
-              parent: eth0
+#      driver_opts:
+#              parent: eth0
       ipam:
           driver: default
           config:
