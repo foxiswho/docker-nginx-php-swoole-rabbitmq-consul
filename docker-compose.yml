@@ -11,7 +11,7 @@ services:
                 ipv4_address: 10.2.1.101
                 aliases:
                   - consulServer1
-                  
+
   consulServer2:
     image: consul
     command: consul agent -server -bind=10.2.1.102 -node=server002 -join 10.2.1.101 -data-dir /tmp/consul
@@ -40,14 +40,14 @@ services:
 
   consulManger:
       image: consul
-      command: consul agent -bind=10.2.1.200 -node=mangaer -join 10.2.1.101
+      command: consul agent -bind=10.2.1.100 -node=mangaer -join 10.2.1.101 -data-dir /tmp/consul
       ports:
               - "8500:8500"
       environment:
            - 'CONSUL_LOCAL_CONFIG={"leave_on_terminate": true}'
       networks:
               npsrc:
-                  ipv4_address: 10.2.1.200
+                  ipv4_address: 10.2.1.100
                   aliases:
                     - consulManger
       depends_on:
