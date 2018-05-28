@@ -49,7 +49,7 @@ services:
 
   consulManger:
       image: consul
-      command: consul agent -bind=10.2.1.100 -node=mangaer -join 10.2.1.101 -data-dir /tmp/consul
+      command: consul agent -bind=10.2.1.100 -node=mangaer -join 10.2.1.101 -data-dir /tmp/consul -ui
       ports:
               - "8500:8500"
       environment:
