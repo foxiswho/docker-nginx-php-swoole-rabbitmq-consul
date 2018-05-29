@@ -3,7 +3,7 @@
     "name": "rabbitmq",
     "tags": ["primary"],
     "address": "10.2.1.99",
-    "port": 5762,
+    "port": 5672,
     "checks": [
       {
         "id": "api",

@@ -159,49 +159,49 @@ services:
             - consulManger
             - rabbitmqManger
 
-#  phpmqpub:
-#      image: "foxiswho/php-alpine:php71"
-#      command: php /demodpsrc/public/index.php service/demo_mq/start
+  phpmqpub:
+      image: "foxiswho/php-alpine:php71"
+      command: php /demodpsrc/public/index.php service/demo_mq/start
 #      expose:
 #        - "9502"
 #      ports:
 #        - "9502:9502"
-#      volumes:
-#        - /Users/:/Users/
-#        - /Volumes/:/Volumes/
-#        - ./wwwroot/dpsrc:/demodpsrc
-#      networks:
-#              npsrc-d:
-#                          aliases:
-#                            - phpmqpub
-#              npsrc:
-#                  ipv4_address: 10.2.1.82
-#                  aliases:
-#                    - phpmqpub
-#      depends_on:
-#            - rabbitmqManger
-#
-#  phpmqsub:
-#      image: "foxiswho/php-alpine:php71"
-#      command: php /demodpsrc/public/index.php service/demo_mq_sub/start
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./wwwroot/dpsrc:/demodpsrc
+      networks:
+              npsrc-d:
+                          aliases:
+                            - phpmqpub
+              npsrc:
+                  ipv4_address: 10.2.1.82
+                  aliases:
+                    - phpmqpub
+      depends_on:
+            - rabbitmqManger
+
+  phpmqsub:
+      image: "foxiswho/php-alpine:php71"
+      command: php /demodpsrc/public/index.php service/demo_mq_sub/start
 #      expose:
 #        - "9503"
 #      ports:
 #        - "9503:9503"
-#      volumes:
-#        - /Users/:/Users/
-#        - /Volumes/:/Volumes/
-#        - ./wwwroot/dpsrc:/demodpsrc
-#      networks:
-#              npsrc-d:
-#                          aliases:
-#                            - phpmqsub
-#              npsrc:
-#                  ipv4_address: 10.2.1.83
-#                  aliases:
-#                    - phpmqsub
-#      depends_on:
-#            - rabbitmqManger
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./wwwroot/dpsrc:/demodpsrc
+      networks:
+              npsrc-d:
+                          aliases:
+                            - phpmqsub
+              npsrc:
+                  ipv4_address: 10.2.1.83
+                  aliases:
+                    - phpmqsub
+      depends_on:
+            - rabbitmqManger
 
 #  mysql:
 #      build: ./mysql
