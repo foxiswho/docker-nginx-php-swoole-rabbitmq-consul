@@ -1,0 +1,17 @@
+{
+  "service": {
+    "name": "rabbitmq",
+    "tags": ["primary"],
+    "address": "10.2.1.99",
+    "port": 5762,
+    "checks": [
+      {
+        "id": "api",
+        "name": "HTTP API on port 5000",
+        "http": "http://www.baidu.com",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}

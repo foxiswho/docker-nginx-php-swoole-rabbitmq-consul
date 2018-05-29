@@ -71,6 +71,7 @@ services:
       image: "rabbitmq:3-management"
       ports:
           - "15672:15672"
+          - "5672:5672"
       environment:
            - RABBITMQ_DEFAULT_USER = guest
            - RABBITMQ_DEFAULT_PASS = guest
@@ -84,46 +85,58 @@ services:
                     - rabbitmq
       depends_on:
             - consulServer1
-#  nginx:
-#      build: ./nginx
-#      ports:
-#        - "80:80"
-#      volumes:
-##        - ./nginx/vhost:/etc/nginx/conf/vhost:ro
-#        - /Users/:/Users/
-#        - /Volumes/:/Volumes/
-#        - ./nginx/vhost:/Volumes/work/vhost:ro
-#      environment:
-#          - DEBUG=true
-#          - HOST_OS=mac
-##      expose:
-##        - "9000"
-##        - "6379"
-##        - "3306"
-##        - "9200"
-##        - "9300"
-#      networks:
-#              npsrc:
-#                  aliases:
-#                    - nginx
-#      depends_on:
-#            - php
-#  php:
-#      build: ./php
+
+  nginx:
+      build: ./nginx
+      ports:
+        - "80:80"
+      volumes:
+#        - ./nginx/vhost:/etc/nginx/conf/vhost:ro
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./nginx/vhost:/Volumes/work/vhost:ro
+        - ./wwwroot/dpsrc:/demodpsrc
+      environment:
+          - DEBUG=true
+          - HOST_OS=mac
 #      expose:
 #        - "9000"
-#      volumes:
-#        - /Users/:/Users/
-#        - /Volumes/:/Volumes/
-#      networks:
-#              npsrc:
-#                  aliases:
-#                    - php
+#        - "6379"
+#        - "3306"
+#        - "9200"
+#        - "9300"
+      networks:
+              npsrc-d:
+                      aliases:
+                        - nginx
+              npsrc:
+                  ipv4_address: 10.2.1.78
+                  aliases:
+                    - nginx
+      depends_on:
+            - php
+
+  php:
+      build: ./php
+      expose:
+        - "9000"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./wwwroot/dpsrc:/demodpsrc
+      networks:
+              npsrc-d:
+                      aliases:
+                        - php
+              npsrc:
+                  ipv4_address: 10.2.1.79
+                  aliases:
+                    - php
 #      depends_on:
 #            - mysql
   phpcli:
       build: ./php-cli
-      command: php /demo/demo.php
+      command: php /demodpsrc/public/index.php service/demo/start
       expose:
         - "9501"
       ports:
@@ -131,15 +144,62 @@ services:
       volumes:
         - /Users/:/Users/
         - /Volumes/:/Volumes/
-        - ./php-cli/demo:/demo:ro
+        - ./wwwroot/dpsrc:/demodpsrc
       networks:
               npsrc-d:
                           aliases:
-                            - rabbitmq
+                            - phpcli
               npsrc:
                   ipv4_address: 10.2.1.80
                   aliases:
                     - phpcli
+      depends_on:
+            - rabbitmqManger
+
+  phpmqpub:
+      image: "foxiswho/php-alpine:php71"
+      command: php /demodpsrc/public/index.php service/demo_mq/start
+      expose:
+        - "9502"
+      ports:
+        - "9502:9502"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./wwwroot/dpsrc:/demodpsrc
+      networks:
+              npsrc-d:
+                          aliases:
+                            - phpmqpub
+              npsrc:
+                  ipv4_address: 10.2.1.82
+                  aliases:
+                    - phpmqpub
+      depends_on:
+            - rabbitmqManger
+
+  phpmqsub:
+      image: "foxiswho/php-alpine:php71"
+      command: php /demodpsrc/public/index.php service/demo_mq_sub/start
+      expose:
+        - "9503"
+      ports:
+        - "9503:9503"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./wwwroot/dpsrc:/demodpsrc
+      networks:
+              npsrc-d:
+                          aliases:
+                            - phpmqsub
+              npsrc:
+                  ipv4_address: 10.2.1.83
+                  aliases:
+                    - phpmqsub
+      depends_on:
+            - rabbitmqManger
+            
 #  mysql:
 #      build: ./mysql
 #      hostname: mysqlhost

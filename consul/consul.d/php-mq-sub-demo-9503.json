@@ -1,0 +1,17 @@
+{
+  "service": {
+    "name": "php-mq-sub-demo",
+    "tags": ["primary"],
+    "address": "10.2.1.83",
+    "port": 9503,
+    "checks": [
+      {
+        "id": "api",
+        "name": "HTTP API on port 5000",
+        "http": "http://www.baidu.com",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}

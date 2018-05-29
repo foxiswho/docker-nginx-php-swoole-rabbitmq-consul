@@ -8,6 +8,14 @@ https://hub.docker.com/_/rabbitmq/
 
 # 步骤
 
+## 下载demo文件并指定目录 dpsrc
+https://github.com/foxiswho/php-swoole-rabbitmq-consul-demo.git
+
+```angular2html
+cd wwwroot
+git clone https://github.com/foxiswho/php-swoole-rabbitmq-consul-demo.git "dpsrc"
+```
+
 ## 启动
 ```shell
 docker-compose up 

@@ -8,3 +8,4 @@ app/_dev.php
 .project
 /node_modules/*
 /runtime/*
+wwwroot/dpsrc/*
