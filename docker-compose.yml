@@ -51,9 +51,11 @@ services:
 
   consulManger:
       image: consul
-      command: consul agent -bind=10.2.1.100 -node=mangaer -join 10.2.1.101 -data-dir /tmp/consul
+      command: consul agent -bind=10.2.1.100 -node=mangaer -join 10.2.1.101 -data-dir /tmp/consul -config-dir /consul/config -client 0.0.0.0
       environment:
            - 'CONSUL_LOCAL_CONFIG={"leave_on_terminate": true}'
+      volumes:
+           - ./consul/consul.d:/consul/config
       networks:
               npsrc:
                   ipv4_address: 10.2.1.100
@@ -119,20 +121,25 @@ services:
 #                    - php
 #      depends_on:
 #            - mysql
-#  phpcli:
-#      build: ./php-cli
-#      expose:
-#        - "9501"
-#      ports:
-#        - "9501:9501"
-#      volumes:
-#        - /Users/:/Users/
-#        - /Volumes/:/Volumes/
-#        - ./php-cli/demo:/demo:ro
-#      networks:
-#              npsrc:
-#                  aliases:
-#                    - phpcli
+  phpcli:
+      build: ./php-cli
+      command: php /demo/demo.php
+      expose:
+        - "9501"
+      ports:
+        - "9501:9501"
+      volumes:
+        - /Users/:/Users/
+        - /Volumes/:/Volumes/
+        - ./php-cli/demo:/demo:ro
+      networks:
+              npsrc-d:
+                          aliases:
+                            - rabbitmq
+              npsrc:
+                  ipv4_address: 10.2.1.80
+                  aliases:
+                    - phpcli
 #  mysql:
 #      build: ./mysql
 #      hostname: mysqlhost
