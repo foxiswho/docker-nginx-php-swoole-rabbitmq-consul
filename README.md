@@ -26,6 +26,21 @@ docker-compose up
 docker-compose down 
 ```
 
+# 其他
+## 注册中心访问
+浏览器打开
+```angular2html
+http://localhost:8500/ui/
+```
+
+## 消息队列web 管理
+```angular2html
+http://localhost:15672/
+```
+默认用户及密码
+guest
+guest
+
 
 # compose 配置说明
 https://docs.docker.com/compose/compose-file/#context
