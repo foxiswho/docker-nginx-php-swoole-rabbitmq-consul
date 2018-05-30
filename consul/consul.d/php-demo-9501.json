@@ -1,5 +1,6 @@
 {
   "service": {
+    "id": "php-demo-001",
     "name": "php-demo",
     "tags": ["primary"],
     "address": "10.2.1.80",

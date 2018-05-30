@@ -1,5 +1,6 @@
 {
   "service": {
+    "id": "php-mq-demo-001",
     "name": "php-mq-demo",
     "tags": ["primary"],
     "address": "10.2.1.82",
