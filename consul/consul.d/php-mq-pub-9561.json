@@ -1,15 +1,15 @@
 {
   "service": {
-    "id": "php-mq-demo-002",
+    "id": "php-mq-demo-001",
     "name": "php-mq-demo",
     "tags": ["primary"],
-    "address": "10.2.1.85",
-    "port": 9505,
+    "address": "10.2.1.61",
+    "port": 9561,
     "checks": [
       {
         "id": "api",
-        "name": "HTTP API on port 5000",
-        "script": "ping 10.2.1.85",
+        "name": "ping IP",
+        "script": "ping 10.2.1.61",
         "interval": "10s",
         "timeout": "1s"
       }

@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "php-mq-sub-demo-001",
+    "name": "php-mq-sub-demo",
+    "tags": ["primary"],
+    "address": "10.2.1.71",
+    "port": 9571,
+    "checks": [
+      {
+        "id": "api",
+        "name": "ping IP",
+        "script": "ping 10.2.1.71",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}
