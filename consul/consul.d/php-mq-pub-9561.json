@@ -7,9 +7,10 @@
     "port": 9561,
     "checks": [
       {
-        "id": "php-mq-demo-001",
+        "id": "php-mq-demo1",
         "name": "ping IP",
-        "http": "http://www.baidu.com",
+        "shell": "/bin/sh",
+        "args": ["ping 10.2.1.61 >/dev/null 2>&1"],
         "interval": "30s",
         "timeout": "1s"
       }

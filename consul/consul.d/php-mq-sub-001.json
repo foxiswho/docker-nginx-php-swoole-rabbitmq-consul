@@ -9,7 +9,8 @@
       {
         "id": "php-mq-sub-demo-001",
         "name": "ping IP",
-        "http": "http://www.baidu.com",
+        "shell": "/bin/sh",
+        "args": ["ping 10.2.1.71 >/dev/null 2>&1"],
         "interval": "30s",
         "timeout": "1s"
       }

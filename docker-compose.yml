@@ -53,7 +53,7 @@ services:
       ports:
               - "8500:8500"
       environment:
-           - 'CONSUL_LOCAL_CONFIG={"leave_on_terminate": true}'
+           - 'CONSUL_LOCAL_CONFIG={"leave_on_terminate": true,"enable_script_checks":true}'
       volumes:
            - ./consul/consul.d:/consul/config
       networks:

@@ -7,8 +7,10 @@
     "port": 9501,
     "check": {
       "name": "ping IP",
-      "http": "http://www.baidu.com",
-      "interval": "30s"
+      "shell": "/bin/sh",
+      "args": ["ping 10.2.1.80"],
+      "interval": "30s",
+      "timeout": "1s"
     }
   }
 }
