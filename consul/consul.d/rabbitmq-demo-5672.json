@@ -8,8 +8,8 @@
     "checks": [
       {
         "id": "api",
-        "name": "HTTP API on port 5000",
-        "http": "http://www.baidu.com",
+        "name": "HTTP API on port 15672",
+        "http": "http://10.2.1.99:15672",
         "interval": "10s",
         "timeout": "1s"
       }
