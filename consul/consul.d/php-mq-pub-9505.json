@@ -1,10 +1,10 @@
 {
   "service": {
-    "id": "php-mq-sub-demo-001",
-    "name": "php-mq-sub-demo",
+    "id": "php-mq-demo-002",
+    "name": "php-mq-demo",
     "tags": ["primary"],
-    "address": "10.2.1.83",
-    "port": 9503,
+    "address": "10.2.1.85",
+    "port": 9505,
     "checks": [
       {
         "id": "api",

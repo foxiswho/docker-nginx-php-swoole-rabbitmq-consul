@@ -161,7 +161,7 @@ services:
 
   phpmqpub:
       image: "foxiswho/php-alpine:php71"
-      command: php /demodpsrc/public/index.php service/demo_mq/start
+      command: php /demodpsrc/public/index.php service/mq_pub/start
 #      expose:
 #        - "9502"
 #      ports:
@@ -175,7 +175,7 @@ services:
                           aliases:
                             - phpmqpub
               npsrc:
-                  ipv4_address: 10.2.1.82
+                  ipv4_address: 10.2.1.85
                   aliases:
                     - phpmqpub
       depends_on:
@@ -183,7 +183,7 @@ services:
 
   phpmqsub:
       image: "foxiswho/php-alpine:php71"
-      command: php /demodpsrc/public/index.php service/demo_mq_sub/start
+      command: php /demodpsrc/public/index.php service/mq_sub/start
 #      expose:
 #        - "9503"
 #      ports:
@@ -197,7 +197,7 @@ services:
                           aliases:
                             - phpmqsub
               npsrc:
-                  ipv4_address: 10.2.1.83
+                  ipv4_address: 10.2.1.86
                   aliases:
                     - phpmqsub
       depends_on:
