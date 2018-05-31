@@ -8,8 +8,8 @@
     "checks": [
       {
         "id": "api",
-        "name": "HTTP API on port 5000",
-        "http": "http://www.baidu.com",
+        "name": "ping IP",
+        "script": "ping 10.2.1.86",
         "interval": "10s",
         "timeout": "1s"
       }
