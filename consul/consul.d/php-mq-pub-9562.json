@@ -7,10 +7,10 @@
     "port": 9562,
     "checks": [
       {
-        "id": "api",
+        "id": "php-mq-demo-002",
         "name": "ping IP",
-        "script": "ping 10.2.1.62",
-        "interval": "10s",
+        "http": "http://www.baidu.com",
+        "interval": "30s",
         "timeout": "1s"
       }
     ]
